@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>模擬貼文頁面</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .account-dropdown { position: relative; display: inline-block; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: #f1f1f1;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a { color: black; padding: 12px 16px; display: block; text-decoration: none; }
+        .dropdown-content a:hover { background-color: #ddd; }
+        .account-dropdown:hover .dropdown-content { display: block; }
+    </style>
+</head>
+<body>
+<!-- 上方搜尋與帳號 -->
+<nav class="navbar navbar-light bg-light px-1 py-1 shadow p-3 mb-5 bg-body rounded sticky-top" style="height: 85px;">
+    <form class="d-flex flex-grow-1">
+        <input id="inputBox" class="form-control me-2" type="search" placeholder="Input" aria-label="Search">
+        <button id="summitBtn" class="btn btn-outline-success" type="submit">搜尋</button>
+    </form>
+    <!-- 帳號等等資訊 -->
+    <div class="account-dropdown ms-3">
+        <!-- 帳號名可更改 -->
+        <button id="accountBtn" class="btn btn-outline-primary rounded-circle">Account</button>
+        <div class="dropdown-content">
+            <a href="#">收藏</a>
+            <a href="#">搜尋歷史</a>
+            <a href="#">登出</a>
+        </div>
+    </div>
+</nav>
+
+<!-- 貼文區 -->
+<div class="container mt-3" style="margin-top: 95px;">
+    <div id="post-list">
+
+        <!-- 單一貼文樣板 -->
+        <div id="post" class="card mb-4 shadow p-3 mb-5 bg-body rounded" style="width: 100%; max-width: 1700px; margin: auto;">
+            <div class="row g-0">
+                <!-- 圖片區 40% -->
+                <div id="imageBlock" class="col-md-5 carousel slide" data-bs-ride="carousel" style="background-color: #eee; height: auto;">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src="..." class="img-fluid img-thumbnail" alt="圖片區1">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="img-fluid img-thumbnail" alt="圖片區2">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="..." class="img-fluid img-thumbnail" alt="圖片區3">
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#imageBlock" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#imageBlock" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+                <!-- 資料區 60% -->
+                <div id="dataBlock" class="col-md-7">
+                    <!-- 上懸bar-->
+                    <nav id="upperBar" class="navbar navbar-light bg-light px-3 py-4">
+                        <h3 th:text="${messageT}" >資料區</h3>
+                    </nav>
+                    <!-- 資料列表 -->
+                    <div id="dataTable"class="card-body">
+                        <table class="table table-hover">
+                            <tbody>
+                            <tr>
+                                <th>地址</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>租金</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>坪局</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>格局</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>寵物</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>養魚</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>開伙</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>電梯</th>
+                                <td>text</td>
+                            </tr>
+                            <tr>
+                                <th>聯絡方式</th>
+                                <td>text</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- 收藏按鈕 -->
+                    <div class="d-flex justify-content-end mb-3" style="padding-right: 20px;">
+                        <button id="colletBtn" class="btn btn-outline-primary">
+                            收藏
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
