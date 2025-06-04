@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@
         <div class="tab-content">
             <!-- Login Form -->
             <div id="login" class="tab-pane fade show active" role="tabpanel">
-                <form action="/login" method="post">
+                <form action="/login" method="post" onsubmit="console.log('表單送出！')">
                     <div class="mb-3">
                         <label for="loginName" class="form-label">姓名</label>
                         <input id="loginName" name="LoginName" type="text" class="form-control" placeholder="請輸入姓名">
@@ -37,23 +37,28 @@
 
                     <button id="loginBtn" type="submit" class="btn btn-primary w-100">登入</button>
                 </form>
+                <hr class="my-4">
+                <a href="/oauth2/authorization/google" class="btn btn-danger w-100">
+                    <i class="bi bi-google"></i>
+                    使用 Google 帳號登入
+                </a>
             </div>
 
 
             <!-- Signup Form -->
             <div id="signup" class="tab-pane fade" role="tabpanel">
-                <form action="/signup" method="post">
+                <form action="/signup" method="post" onsubmit="console.log('表單送出！')">
                     <div class="mb-3">
                         <label for="signupName" class="form-label">姓名</label>
-                        <input id="signupName" type="text" class="form-control" placeholder="請輸入姓名">
+                        <input id="signupName" name="signupName" type="text" class="form-control" placeholder="請輸入姓名">
                     </div>
                     <div class="mb-3">
                         <label for="signupPassword" class="form-label">密碼</label>
-                        <input id="signupPassword" type="password" class="form-control" placeholder="請設定密碼">
+                        <input id="signupPassword" name="signupPassword" type="password" class="form-control" placeholder="請設定密碼">
                     </div>
                     <div class="mb-3">
                         <label for="signupConfirmPassword" class="form-label">確認密碼</label>
-                        <input id="signupConfirmPassword" type="password" class="form-control" placeholder="再次輸入密碼">
+                        <input id="signupConfirmPassword" name="signupConfirmPassword" type="password" class="form-control" placeholder="再次輸入密碼">
                     </div>
 
                     <button id="signupBtn" type="submit" class="btn btn-success w-100">註冊</button>

@@ -15,6 +15,22 @@ java {
 
 repositories {
     mavenCentral()
+    maven {
+        name="GitHubPackages"
+        url = uri("https://maven.pkg.github.com/StudentRentalSystem/querygenerator")
+        credentials {
+            username = "x-access-token"
+            password = System.getenv("CLIENT_TOKEN")
+        }
+    }
+    maven {
+        name="GitHubPackages"
+        url = uri("https://maven.pkg.github.com/StudentRentalSystem/llmdataparser")
+        credentials {
+            username = "x-access-token"
+            password = System.getenv("CLIENT_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -23,11 +39,23 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.projectlombok:lombok")
+    implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
+    implementation("org.json:json:20231013")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
+    testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    annotationProcessor("org.projectlombok:lombok")
+    implementation("io.github.studentrentalsystem:querygenerator:1.0.0")
+    implementation("io.github.studentrentalsystem:llmdataparser:1.0-SNAPSHOT")
+
 }
 
+tasks.withType(JavaCompile::class) {
+    options.annotationProcessorGeneratedSourcesDirectory = file("src/main/generated")
+}
 tasks.withType<Test> {
     useJUnitPlatform()
 }
