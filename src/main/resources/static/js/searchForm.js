@@ -46,6 +46,14 @@ function handleSearch(event) {
 }
 
 function fetchPosts(keyword = "") {
+
+    const spinner = document.getElementById("loading-spinner");
+    const container = document.getElementById("post-results");
+
+    // ✅ 一點就清空貼文並顯示 loading 動畫
+    container.innerHTML = "";
+    spinner.style.display = "block";
+
     let url = "/searchposts";
 
     /*
@@ -60,10 +68,16 @@ function fetchPosts(keyword = "") {
 
             console.log(" 拿到的資料:", posts)
 
-            const container = document.getElementById("post-list");
-            container.innerHTML = ""; // 清空原本內容
+            spinner.style.display = "none";
+
 
             posts.forEach(post => {
+                const valueMap = {
+                    "-1": "未知",
+                    "0": "否",
+                    "1": "是"
+                };
+
                 // ⛑ 租金欄位
                 const rentalRange = post["租金"] || {};
                 const minRental = rentalRange.minRental;
@@ -102,14 +116,15 @@ function fetchPosts(keyword = "") {
                 // ⛑ 其他欄位
                 const address = post["地址"] || "未知";
                 const area = post["坪數"]?.[0] ?? "未知";
-                const subsidy = post["是否可租屋補助"] ?? "未知";
-                const hasTop = post["是否有頂樓加蓋"] ?? "未知";
-                const allowPet = post["是否可養寵物"] ?? "未知";
-                const allowFish = post["是否可養魚"] ?? "未知";
-                const allowCook = post["是否可開伙"] ?? "未知";
-                const elevator = post["是否有電梯"] ?? "未知";
-                const carPark = post["是否有汽車停車位"] ?? "未知";
-                const scooterPark = post["是否有機車停車位"] ?? "未知";
+
+                const subsidy       = valueMap[post["是否可租屋補助"]]      ?? "未知";
+                const hasTop        = valueMap[post["是否有頂樓加蓋"]]      ?? "未知";
+                const allowPet      = valueMap[post["是否可養寵物"]]        ?? "未知";
+                const allowFish     = valueMap[post["是否可養魚"]]          ?? "未知";
+                const allowCook     = valueMap[post["是否可開伙"]]          ?? "未知";
+                const elevator      = valueMap[post["是否有電梯"]]          ?? "未知";
+                const carPark       = valueMap[post["是否有汽車停車位"]]    ?? "未知";
+                const scooterPark   = valueMap[post["是否有機車停車位"]]    ?? "未知";
 
                 // oid 是否包括檢測
                 const oid = post["_id"]?.["$oid"] || "";
@@ -170,5 +185,8 @@ function fetchPosts(keyword = "") {
             });
 
         })
-        .catch(err => console.error("資料載入失敗:", err));
+        .catch(err => {
+            spinner.style.display = "none";
+            console.error("資料載入失敗:", err)
+        });
 }

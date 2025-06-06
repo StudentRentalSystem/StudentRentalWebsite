@@ -77,22 +77,22 @@
                   <span th:if="${post.rentalRange == null}">未知</span>
                 </td>
               </tr>
-              <tr><th>租屋補助</th><td th:text="${post.rentalSubsidy}">租屋補助</td></tr>
+              <tr><th>租屋補助</th><td th:text="${post.rentalSubsidy == -1 ? '未知' : (post.rentalSubsidy == 1 ? '是' : '否')}">租屋補助</td></tr>
               <tr><th>坪數</th><td th:text="${post.area == null or #lists.isEmpty(post.area) ? '未知' : post.area[0] + ' 坪'}">坪數</td></tr>
               <tr><th>格局</th>
                 <td th:text="${post.layout != null ? post.layout.livingRoom + '廳 ' + post.layout.bathroom + '衛 ' + post.layout.bedroom + '房' : '未知'}">格局</td>
               </tr>
-              <tr><th>是否有頂樓加蓋</th><td th:text="${post.hasRooftopAddOn}">頂樓加蓋</td></tr>
+              <tr><th>是否有頂樓加蓋</th><td th:text="${post.hasRooftopAddOn == -1 ? '未知' : (post.hasRooftopAddOn == 1 ? '是' : '否')}">頂樓加蓋</td></tr>
               <tr>
                 <th>性別限制</th>
                 <td th:text="${post.genderLimit != null ? (post.genderLimit.male == 1 and post.genderLimit.female == 1 ? '不限' : post.genderLimit.male == 1 ? '限男' : post.genderLimit.female == 1 ? '限女' : '未知') : '未知'}">性別限制</td>
               </tr>
-              <tr><th>寵物</th><td th:text="${post.allowPet}">寵物</td></tr>
-              <tr><th>養魚</th><td th:text="${post.allowFish}">養魚</td></tr>
-              <tr><th>開伙</th><td th:text="${post.allowCook}">開伙</td></tr>
-              <tr><th>電梯</th><td th:text="${post.hasElevator}">電梯</td></tr>
-              <tr><th>機車停車位</th><td th:text="${post.hasScooterParking}">機車停車位</td></tr>
-              <tr><th>汽車停車位</th><td th:text="${post.hasCarParking}">汽車停車位</td></tr>
+              <tr><th>寵物</th><td th:text="${post.allowPet == -1 ? '未知' : (post.allowPet == 1 ? '是' : '否')}">寵物</td></tr>
+              <tr><th>養魚</th><td th:text="${post.allowFish == -1 ? '未知' : (post.allowFish == 1 ? '是' : '否')}">養魚</td></tr>
+              <tr><th>開伙</th><td th:text="${post.allowCook == -1 ? '未知' : (post.allowCook == 1 ? '是' : '否')}">開伙</td></tr>
+              <tr><th>電梯</th><td th:text="${post.hasElevator == -1 ? '未知' : (post.hasElevator == 1 ? '是' : '否')}">電梯</td></tr>
+              <tr><th>機車停車位</th><td th:text="${post.hasScooterParking == -1 ? '未知' : (post.hasScooterParking == 1 ? '是' : '否')}">機車停車位</td></tr>
+              <tr><th>汽車停車位</th><td th:text="${post.hasCarParking == -1 ? '未知' : (post.hasCarParking == 1 ? '是' : '否')}">汽車停車位</td></tr>
               <tr>
                 <th>聯絡方式</th>
                 <td colspan="2">
