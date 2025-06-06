@@ -3,8 +3,8 @@ package xyz.jessyu.studentrentalwebsite.controller;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.mongodb.MongoQueryException;
 import io.github.querygenerator.MiniRagApp;
-import io.github.studentrentalsystem.Utils;
 import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,26 +29,31 @@ public class LoadPostController {
     @Autowired
     private MongoTemplate mongoTemplate;
 
-    private String getSearchJSON(String query) {
-        try {
-            JSONObject jsonObject = new JSONObject(query);
-            String result = jsonObject.getString("response");
-            return Utils.getStringJSON(result).toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
-
     @GetMapping("/searchposts")
     public List<Map<String, Object>> loadPosts(@RequestParam(value = "keyword", required = false) String keyword) {
         System.out.println("🔍 searchposts 被呼叫");
         System.out.println(keyword);
-        String queryString = miniRagApp.getMongoDBSearchCmd(keyword);
-        String obj = getSearchJSON(queryString);
-        System.out.println("query :"  + obj);
-        Document queryDoc = Document.parse(obj);
-        Query query = new BasicQuery(queryDoc);
+
+        Document queryDoc = null;
+        try {
+            JSONObject queryJson = miniRagApp.getMongoDBSearchCmdJSON(keyword);
+            queryJson = miniRagApp.getFixedMongoQueryCmd(queryJson);
+            System.out.println("query :"  + queryJson);
+           queryDoc = Document.parse(queryJson.toString());
+        } catch (JSONException e) {
+            System.out.println("JSON syntax error");
+            return new ArrayList<>(); // 返回空列表以避免後續錯誤
+        }
+
+        Query query = null;
+
+        try {
+            query = new BasicQuery(queryDoc);
+        } catch (MongoQueryException e) {
+            System.out.println("Query syntax error: ");
+            query = new BasicQuery(queryDoc);
+        }
+
         List<RentalInfo> data =  mongoTemplate.find(query, RentalInfo.class);
 
         // 將每個 RentalInfo 轉回 Document 格式（保留 "_id": {"$oid": ...}）給前端用
