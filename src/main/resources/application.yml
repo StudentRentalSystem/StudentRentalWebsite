@@ -18,3 +18,8 @@ spring:
     mongodb:
       uri: "mongodb://app:house_rental_app$@localhost:27017/app?authSource=app"
       auto-index-creation: true
+    redis:
+      host: localhost
+      port: 6379
+      password: ""
+      database: 0

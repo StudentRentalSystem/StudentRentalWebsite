@@ -70,6 +70,21 @@ function fetchPosts(keyword = "") {
 
             spinner.style.display = "none";
 
+            /**
+             * If the posts are empty, need to show the alert
+             * */
+            if(posts === null || posts.length === 0) {
+                const alertMessage = `
+                    <div class="alert alert-warning" role="alert">
+                        沒有資料
+                    </div>
+                `;
+                // Add the alert to HTML and stop processing
+                const container = document.getElementById('post-results');
+                container.innerHTML = alertMessage;
+                return;
+            }
+
 
             posts.forEach(post => {
                 const valueMap = {

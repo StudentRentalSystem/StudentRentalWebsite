@@ -35,6 +35,7 @@ dependencies {
     implementation("org.projectlombok:lombok")
     implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity6")
     implementation("org.json:json:20231013")
+    implementation("org.springframework.boot:spring-boot-starter-data-redis")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.springframework.security:spring-security-test")
     testImplementation("org.springframework.security:spring-security-test")
