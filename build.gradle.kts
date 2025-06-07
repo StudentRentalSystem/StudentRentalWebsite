@@ -45,9 +45,6 @@ dependencies {
 
 }
 
-//tasks.withType(JavaCompile::class) {
-//    options.annotationProcessorGeneratedSourcesDirectory = file("src/main/generated")
-//}
 tasks.withType<Test> {
     useJUnitPlatform()
 }
