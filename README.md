@@ -10,34 +10,46 @@
 - 已安裝 [Docker Compose](https://docs.docker.com/compose/)
 
 ---
-
-## 🚀 快速啟動
-
-1. 開啟終端機或 PowerShell，移動到專案根目錄：
-
-   ```bash
-   cd "Path\To\StudentRentalWebsite"
-
-2. 執行 Docker Compose 啟動 Redis：
-   ```bash
-   docker-compose up -d
-
-3. Redis 伺服器將會在背景啟動，預設使用 localhost:6379 連接。
-
-
-## 📁 Volume 持久化說明
-Redis 的資料會儲存在名為 redis-data 的 volume 中，重啟容器後資料仍會保留。
-
-## 🛑 停止 Redis
-若要停止 Redis 伺服器：
-```bash
-docker-compose down
+使用說明
+1. 建立 .env 檔案
+   在專案根目錄建立 .env，填入你的環境變數，例如：
 ```
+MONGO_ROOT_USERNAME=admin
+MONGO_ROOT_PASSWORD=admin123
+MONGO_DB=student_rental
 
-這會停止並移除 Redis 容器，但資料不會刪除。
+GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=your-client-secret
 
-若要連同資料一起刪除，請加上 -v：
-```bash
-docker-compose down -v
+CLIENT_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxx
 ```
+注意： 請勿將 .env 推上版本庫。
 
+2. 使用一條指令快速啟動服務
+   本專案附有自動化腳本 build-and-up.sh，會自動：
+
+- 載入 .env
+
+- 執行 Gradle build
+
+- 啟動 Docker Compose
+
+執行以下指令：
+```bash
+chmod +x build-and-up.sh
+./build-and-up.sh
+```
+3. 查看服務狀態
+```bash
+   docker-compose ps
+
+```
+4. 停止服務
+   ```bash
+   docker-compose down
+   ```
+### 常見問題
+1. Gradle 抓不到環境變數？
+確保你有執行 build-and-up.sh，或手動先執行 export $(grep -v '^#' .env | xargs)。
+2. MongoDB 連線失敗？
+請確認 .env 中的 MongoDB 帳密與 SPRING_DATA_MONGO_URI 的設定一致。

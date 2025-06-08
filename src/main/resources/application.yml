@@ -16,10 +16,10 @@ spring:
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
   data:
     mongodb:
-      uri: "mongodb://app:house_rental_app$@localhost:27017/app?authSource=app"
+      uri: ${SPRING_DATA_MONGODB_URI}
       auto-index-creation: true
     redis:
-      host: host.docker.internal
+      host: ${SPRING_REDIS_HOST}
       port: 6379
       password: ""
       database: 0

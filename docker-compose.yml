@@ -1,15 +1,36 @@
 version: '3.8'
 
 services:
+  mongo:
+    image: mongo:6
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+    volumes:
+      - mongo-data:/data/db
   redis:
-    image: redis:7.2
-    container_name: student-rental-redis
+    image: redis:7
+    container_name: redis
     ports:
       - "6379:6379"
-    volumes:
-      - redis-data:/data
-    command: ["redis-server", "--appendonly", "yes"]
-    restart: unless-stopped
+  app:
+    build: .
+    container_name: student-rental-web
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mongo
+      - redis
+    environment:
+      SPRING_DATA_MONGO_URI: "mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/${MONGO_DB}?authSource=${MONGO_DB}"
+      SPRING_REDIS_HOST: redis
+      SPRING_PROFILES_ACTIVE: dev
+
+      GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
+      GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
 
 volumes:
-  redis-data:
+  mongo-data:
