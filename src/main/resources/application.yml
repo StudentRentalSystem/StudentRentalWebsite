@@ -19,7 +19,9 @@ spring:
       uri: "mongodb://app:house_rental_app$@localhost:27017/app?authSource=app"
       auto-index-creation: true
     redis:
-      host: localhost
+      host: host.docker.internal
       port: 6379
       password: ""
       database: 0
+server:
+  address: 0.0.0.0
