@@ -1,13 +1,6 @@
 version: '3.8'
 
 services:
-  ollama:
-    image: ollama/ollama:latest
-    container_name: ollama
-    ports:
-      - "11434:11434"
-    command: ["serve"]
-
   mongo:
     image: mongo:6
     container_name: mongo
