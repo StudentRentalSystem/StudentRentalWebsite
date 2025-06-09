@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mongodb.MongoQueryException;
 import io.github.querygenerator.MiniRagApp;
+import io.github.studentrentalsystem.LLMConfig;
 import org.bson.Document;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -16,6 +17,7 @@ import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.web.bind.annotation.*;
 import xyz.jessyu.studentrentalwebsite.model.RentalInfo;
 import xyz.jessyu.studentrentalwebsite.repository.RentalInfoRepository;
+import xyz.jessyu.studentrentalwebsite.service.MiniRagAppService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,11 +26,14 @@ import java.util.Map;
 @CrossOrigin
 @RestController
 public class LoadPostController {
-    private static final MiniRagApp miniRagApp = new MiniRagApp();
+    @Autowired
+    private MiniRagAppService miniRagAppService;
+
     @Autowired
     private RentalInfoRepository rentalRepo;
     @Autowired
     private MongoTemplate mongoTemplate;
+
 
     /**
      * The queryJSON is cacheable when the query is valid.
@@ -36,6 +41,7 @@ public class LoadPostController {
     @GetMapping("/searchposts")
     @Cacheable(value = "queryCache", key = "#keyword != null ? #keyword : 'empty'")
     public List<Map<String, Object>> loadPosts(@RequestParam(value = "keyword", required = false) String keyword) {
+        MiniRagApp miniRagApp = miniRagAppService.getMiniRagApp();
         System.out.println("🔍 searchposts 被呼叫");
         System.out.println("搜尋關鍵字: " + keyword);
 

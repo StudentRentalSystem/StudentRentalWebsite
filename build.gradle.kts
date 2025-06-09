@@ -23,6 +23,14 @@ repositories {
             password = System.getenv("CLIENT_TOKEN")
         }
     }
+    maven {
+        name="GitHubPackages"
+        url = uri("https://maven.pkg.github.com/StudentRentalSystem/llmdataparser")
+        credentials {
+            username = "x-access-token"
+            password = System.getenv("CLIENT_TOKEN")
+        }
+    }
 }
 
 dependencies {
@@ -41,7 +49,8 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     annotationProcessor("org.projectlombok:lombok")
-    implementation("io.github.studentrentalsystem:querygenerator:1.0.1")
+    implementation("io.github.studentrentalsystem:querygenerator:1.0.2")
+    implementation("io.github.studentrentalsystem:llmdataparser:1.0.1")
 
 }
 
