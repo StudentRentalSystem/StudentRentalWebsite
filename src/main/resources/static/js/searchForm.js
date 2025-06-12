@@ -134,7 +134,7 @@ function fetchPosts(keyword = "") {
 
                 // ⛑ 其他欄位
                 const address = post["地址"] || "未知";
-                const area = post["坪數"]?.[0] ?? "未知";
+                const area = (post["坪數"]?.[0] == null || post["坪數"]?.[0] == -1) ? "未知" : post["坪數"][0];
 
                 const subsidy       = valueMap[post["是否可租屋補助"]]      ?? "未知";
                 const hasTop        = valueMap[post["是否有頂樓加蓋"]]      ?? "未知";
