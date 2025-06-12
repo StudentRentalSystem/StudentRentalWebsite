@@ -8,6 +8,6 @@ echo "==== Gradle Build ===="
 ./gradlew clean build -x test
 
 echo "==== Docker Compose Up ===="
-docker-compose --env-file .env up -d
+docker compose --env-file .env up -d
 
 echo "==== 完成！服務已啟動 ===="
