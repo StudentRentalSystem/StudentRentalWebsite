@@ -9,8 +9,10 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
+      MONGO_DB: ${MONGO_DB}
     volumes:
       - mongo-data:/data/db
+      - ./mongo-init:/docker-entrypoint-initdb.d:ro
   redis:
     image: redis:7
     container_name: redis
@@ -31,6 +33,9 @@ services:
 
       GOOGLE_CLIENT_ID: ${GOOGLE_CLIENT_ID}
       GOOGLE_CLIENT_SECRET: ${GOOGLE_CLIENT_SECRET}
+
+      LLM_SERVER_ADDRESS: ${LLM_SERVER_ADDRESS}
+      LLM_SERVER_PORT: ${LLM_SERVER_PORT}
 
 volumes:
   mongo-data:

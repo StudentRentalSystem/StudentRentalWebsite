@@ -6,7 +6,9 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
             scope:
+              - openid
               - profile
               - email
         provider:
@@ -29,3 +31,5 @@ spring:
 
 server:
   address: 0.0.0.0
+  port: 8080
+  forward-headers-strategy: framework
