@@ -1,5 +1,5 @@
 #!/bin/bash
-mongosh -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin <<EOF
+mongo -u $MONGO_INITDB_ROOT_USERNAME -p $MONGO_INITDB_ROOT_PASSWORD --authenticationDatabase admin <<EOF
 use $MONGO_INITDB_ROOT_USERNAME
 db.createUser({
   user: "$MONGO_INITDB_ROOT_USERNAME",
