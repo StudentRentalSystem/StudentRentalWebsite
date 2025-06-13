@@ -18,8 +18,8 @@ public class LLMConfigBean {
     private int serverPort;
 
     @Bean
-    public LLMConfig llmConfig() {
-        return new LLMConfig(true, serverAddress, serverPort, LLMConfig.ModelType.LLAMA3_8B, false, null);
+    public LLMConfig llmConfig() throws IllegalArgumentException{
+        return new LLMConfig(LLMConfig.LLMMode.CHAT, serverAddress, serverPort, "deepseek-r1:14b", false, null);
     }
 
 }
