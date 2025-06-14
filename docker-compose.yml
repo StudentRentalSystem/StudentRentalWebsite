@@ -1,18 +1,6 @@
 version: '3.8'
 
 services:
-  mongo:
-    image: mongo:4.4.18
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD}
-      MONGO_DB: ${MONGO_DB}
-    volumes:
-      - mongo-data:/data/db
-      - ./mongo-init:/docker-entrypoint-initdb.d:ro
   redis:
     image: redis:7
     container_name: redis
@@ -24,10 +12,9 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - mongo
       - redis
     environment:
-      SPRING_DATA_MONGODB_URI: "mongodb://${MONGO_ROOT_USERNAME}:${MONGO_ROOT_PASSWORD}@mongo:27017/${MONGO_DB}?authSource=admin"
+      SPRING_DATA_MONGODB_URI: ${SPRING_DATA_MONGODB_URI}
       SPRING_REDIS_HOST: redis
       SPRING_PROFILES_ACTIVE: dev
 
@@ -36,6 +23,3 @@ services:
 
       LLM_SERVER_ADDRESS: ${LLM_SERVER_ADDRESS}
       LLM_SERVER_PORT: ${LLM_SERVER_PORT}
-
-volumes:
-  mongo-data:
