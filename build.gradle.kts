@@ -49,7 +49,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     annotationProcessor("org.projectlombok:lombok")
-    implementation("io.github.studentrentalsystem:querygenerator:1.0.2")
+    implementation("io.github.studentrentalsystem:querygenerator:1.0.3")
     implementation("io.github.studentrentalsystem:llmdataparser:1.0.2")
 
 }
