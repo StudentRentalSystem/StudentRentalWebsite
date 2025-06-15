@@ -1,17 +1,13 @@
 package xyz.jessyu.studentrentalwebsite.controller;
 
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import xyz.jessyu.studentrentalwebsite.service.UserService;
 
 @Controller
 public class LoginController {
 
-    UserService userService = new UserService();
 
     @RequestMapping("/loginpage")
     public String LoginPage(@RequestParam(required = false) String error,
@@ -39,8 +35,10 @@ public class LoginController {
      *
      * @param LoginName
      * @param Password
-     * @param session this one is recording who login now
+     * @param session this one is recording who log in now
      */
+
+    /**
     @PostMapping("/login")
     public String LoginAction(@RequestParam String LoginName,
                               @RequestParam String Password,
@@ -83,4 +81,5 @@ public class LoginController {
 
         return "redirect:/loginpage?success=true";
     }
+     **/
 }
