@@ -26,6 +26,7 @@ spring:
   llm:
     server-address: ${LLM_SERVER_ADDRESS}
     server-port: ${LLM_SERVER_PORT}
+    model-name: ${LLM_MODEL_NAME}
 
 server:
   address: 0.0.0.0

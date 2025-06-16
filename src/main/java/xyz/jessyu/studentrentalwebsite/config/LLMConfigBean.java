@@ -17,9 +17,12 @@ public class LLMConfigBean {
     @Value("${llm.server-port}")
     private int serverPort;
 
+    @Value("${llm.model-name}")
+    private String modelName;
+
     @Bean
     public LLMConfig llmConfig() throws IllegalArgumentException{
-        return new LLMConfig(LLMConfig.LLMMode.CHAT, serverAddress, serverPort, "deepseek-r1:14b", false, null);
+        return new LLMConfig(LLMConfig.LLMMode.CHAT, serverAddress, serverPort, modelName, false, null);
     }
 
 }
