@@ -8,20 +8,32 @@
 
 - 已安裝 [Docker](https://www.docker.com/)
 - 已安裝 [Docker Compose](https://docs.docker.com/compose/)
-
+- 已安裝 [OLLAMA] (https://ollama.com/)
+   - OLLAMA 安裝完成後要下載 `llama3:8b` 和 `deepseek-r1:7b`
 ---
 使用說明
 1. 建立 .env 檔案
    在專案根目錄建立 .env，填入你的環境變數，例如：
 ```
+# MongoDB 設定，看是 local 或 MongoDB Atlas
 MONGO_ROOT_USERNAME=admin
 MONGO_ROOT_PASSWORD=admin123
 MONGO_DB=student_rental
+SPRING_DATA_MONGODB_URI=mongodb://username:password@mongo:27017/db?authSource=admin
 
+# Google api console 取得
 GOOGLE_CLIENT_ID=your-client-id.apps.googleusercontent.com
 GOOGLE_CLIENT_SECRET=your-client-secret
 
-CLIENT_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxx
+# GitHub packages 用於 GitHub package 抓取，需有 read package 權限
+CLIENT_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxxxxxxx
+
+# Redis 預設不須更動
+SPRING_REDIS_HOST=redis
+
+# LLM 跑 ollama serve 的主機位置
+LLM_SERVER_ADDRESS=http://xxx.xxx.xxx.xxx
+LLM_SERVER_PORT=11434
 ```
 注意： 請勿將 .env 推上版本庫。
 
